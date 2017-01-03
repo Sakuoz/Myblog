@@ -2,8 +2,8 @@ CSRF_ENABLED = True
 SECRET_KEY = 'you-will-never-gusess'
 
 OPENID_PROVIDERS = [
-    { 'name': 'Google', 'url': 'https://www.google.com/accounts/o8/id' },
-    { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }
+    { 'name': 'Baidu', 'url': 'https://www.baidu.com' },
+    { 'name': 'MyOpenID', 'url': 'http://sakuoz.openid.org.cn/' }
 ]
 
 import os

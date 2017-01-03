@@ -4,6 +4,15 @@ from app import app, db, lm, oid
 from .forms import LoginForm
 from .models import User
 
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))     # id永远为unicode字符串,因此id发送之前需要转成整型,否则报错
+
+@app.before_request
+def before_request():
+    g.user = current_user
+
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -64,15 +73,22 @@ def after_login(resp):
         login_user(user, remember = remember_me)
         return redirect(request.args.get('next') or url_for('index'))
 
-@app.before_request
-def before_request():
-    g.user = current_user
-
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@lm.user_loader
-def load_user(id):
-    return User.query.get(int(id))     # id永远为unicode字符串,因此id发送之前需要转成整型,否则报错
+@app.route('/user/<nickname>')
+@login_required
+def user(nickname):
+    user = User.query.filter_by(nickname = nickname).first()
+    if user == None:
+        flash('User' + nickname + 'not found.')
+        return redirect(url_for('index'))
+    posts = [
+        { 'author': user, 'body': 'Test post #1' },
+        { 'author': user, 'body': 'Test post #2' }
+    ]
+    return render_template('user.html',
+        user = user,
+        posts = posts)
