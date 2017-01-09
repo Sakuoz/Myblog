@@ -1,4 +1,4 @@
-#! flask/bin/python
+#! flask\Scripts\python
 # 数据库迁移
 import imp
 from migrate.versioning import api

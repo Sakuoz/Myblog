@@ -1,4 +1,4 @@
-#! flask/bin/python
+#! flask\Scripts\python
 # 创建数据库
 from migrate.versioning import api
 from config import SQLALCHEMY_DATABASE_URI

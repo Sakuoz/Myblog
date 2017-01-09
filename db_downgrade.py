@@ -1,4 +1,4 @@
-#! flask/bin/python
+#! flask\Scripts\python
 # 数据库回退
 from migrate.versioning import api
 from config import SQLALCHEMY_DATABASE_URI
