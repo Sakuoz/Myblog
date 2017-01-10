@@ -57,12 +57,15 @@ class User(db.Model):
     def get_id(self):
         return str(self.id)          # python3
 
+    # 用户头像
     def avatar(self, size):
         m = hashlib.md5(self.email.encode(encoding='utf-8'))
         return 'http://www.gravatar.com/avatar/' + m.hexdigest() + '?d=mm&s=' + str(size)
 
+    # 查询关注者
     def followed_posts(self):
         return Post.query.join(followers, (followers.c.followed_id == Post.user_id)).filter(followers.c.follower_id == self.id).order_by(Post.timestamp.desc())
+        #              |-----------------过滤--------------------|.|------------排序--------------|
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)

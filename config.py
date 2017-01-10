@@ -21,3 +21,6 @@ MAIL_PASSWORD = None
 
 # administrator list
 ADMINS = ['951463382@qq.com']
+
+# 分页-单页Blog显示数量
+POSTS_PER_PAGE = 3

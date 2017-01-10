@@ -25,3 +25,6 @@ class EditForm(Form):
             self.nickname.errors.append('这个昵称已存在,请重新选择!')
             return False
         return True
+
+class PostForm(Form):
+    post = StringField('post', validators = [DataRequired()])
