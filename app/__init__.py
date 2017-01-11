@@ -8,7 +8,6 @@ from config import basedir, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)                             # 创建对象(数据库)
-
 lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
