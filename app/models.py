@@ -59,9 +59,10 @@ class User(db.Model):
         return str(self.id)          # python3
 
     # 用户头像
-    def avatar(self, size):
-        m = hashlib.md5(self.email.encode(encoding='utf-8'))
-        return 'http://www.gravatar.com/avatar/' + m.hexdigest() + '?d=mm&s=' + str(size)
+    def avatar(self):
+        #m = hashlib.md5(self.email.encode(encoding='utf-8'))
+        #return 'http://www.gravatar.com/avatar/' + m.hexdigest() + '?d=mm&s=' + str(size)
+        return '../static/img/1.jpg'
 
     # 查询关注者
     def followed_posts(self):
