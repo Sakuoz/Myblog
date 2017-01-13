@@ -2,37 +2,48 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table>
-  <tr valign="top">
-    <td><img src="{{ user.avatar() }}" alt="" style="width: 50px; height: 50px;"></td>
-    <td>
-      <h1>User: {{ user.nickname }}</h1>
-      {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-      {% if user.last_seen %}<p><i>Last seen on: {{ user.last_seen }}</i></p>{% endif %}
-      <p>
-        {{ user.followers.count() }} followers |
-        {% if user.id == g.user.id %}
+
+<div class="container">
+  <table>
+    <tr valign="top">
+      <td><img src="{{ user.avatar() }}" alt="" style="width: 50px; height: 50px; margin-right: 20px; margin-top: 20px;"></td>
+      <td>
+        <h1>User: {{ user.nickname }}</h1>
+        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+        {% if user.last_seen %}<p><i>Last seen on: {{ user.last_seen }}</i></p>{% endif %}
+        <p>
+          {{ user.followers.count() }} followers |
+          {% if user.id == g.user.id %}
           <a href="{{ url_for('edit') }}">编辑</a>
-        {% elif not g.user.is_following(user) %}
+          {% elif not g.user.is_following(user) %}
           <a href="{{ url_for('follow', nickname = user.nickname) }}">Follow</a>
-        {% else %}
+          {% else %}
           <a href="{{ url_for('unfollow', nickname = user.nickname) }}">Unfollow</a>
+          {% endif %}
+        </p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  {% for post in posts.items %}
+    {% include 'post.html' %}
+  {% endfor %}
+    <nav>
+      <ul class="pager">
+        {% if posts.has_prev %}
+          <li><a href="{{ url_for('user', nickname = user.nickname, page = posts.prev_num) }}">&larr; Olde</a></li>
+        {% else %}
+          <li class="disabled"><a href="#">&larr; Olde</a></li>
         {% endif %}
-      </p>
-    </td>
-  </tr>
-</table>
-<hr>
-{% for post in posts.items %}
-  {% include 'post.html' %}
-{% endfor %}
-{% if posts.has_prev %}
-<a href="{{ url_for('user', nickname = user.nickname, page = posts.prev_num) }}"> << 上一页 </a>
-{% else %}
-{% endif %}
-{% if posts.has_next %}
-<a href="{{ url_for('user', nickname = user.nickname, page = posts.next_num) }}"> 下一页 >> </a>
-{% else %}
-{% endif %}
+        {% if posts.has_next %}
+          <li><a href="{{ url_for('user', nickname = user.nickname, page = posts.next_num) }}">Newer &rarr;</a></li>
+        {% else %}
+          <li class="disabled"><a href="#">Newer &rarr;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+
+</div>
 
 {% endblock %}

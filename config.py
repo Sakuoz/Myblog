@@ -3,8 +3,7 @@ SECRET_KEY = 'you-will-never-gusess'
 
 OPENID_PROVIDERS = [
     { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' },
-    { 'name': 'MyOpenID', 'url': 'http://sakuoz.openid.org.cn/' },
-    { 'name': 'QQ', 'url': 'https://graph.z.qq.com/moc2/me' }
+    { 'name': 'MyOpenID', 'url': 'http://sakuoz.openid.org.cn/' }
 ]
 
 import os

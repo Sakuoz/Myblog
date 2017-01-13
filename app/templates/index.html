@@ -2,37 +2,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Hello,{{g.user.nickname}}</h1>
-<form class="" action="" method="post" name="post">
-  {{ form.hidden_tag() }}
-  <table>
-    <tr>
-      <td>Say something:</td>
-      <td>{{ form.post(size = 30, maxlength = 140) }}</td>
-      <td>
-        {% for error in form.errors.post %}
-        <span style="color: red;">{{ error }}</span><br>
-        {% endfor %}
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><input type="submit" name="" value="Post!"></td>
-      <td></td>
-    </tr>
-  </table>
-</form>
-<!-- posts is a Paginate object -->
-{% for post in posts.items %}
+<div class="container">
+  <h1>Hello,{{ g.user.nickname }}</h1>
+  <form class="" action="" method="post" name="post">
+    {{ form.hidden_tag() }}
+    <table>
+      <tr>
+        <td>Say something:</td>
+        <td>{{ form.post(size = 40, maxlength = 140, class_ = "form-control") }}</td>
+        <td>
+          {% for error in form.errors.post %}
+          <span style="color: red;">{{ error }}</span><br>
+          {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class="btn btn-default" type="submit" name="" value="Post!" style="margin-top: 20px;"></td>
+        <td></td>
+      </tr>
+    </table>
+  </form>
+
+  {% for post in posts.items %}
   {% include 'post.html' %}
-{% endfor %}
-{% if posts.has_prev %}
-<a href="{{ url_for('index', page = posts.prev_num) }}"> << 上一页 </a>
-{% else %}
-{% endif %}
-{% if posts.has_next %}
-<a href="{{ url_for('index', page = posts.next_num) }}"> 下一页 >> </a>
-{% else %}
-{% endif %}
+  {% endfor %}
+  {% if posts.has_prev %}
+  <a href="{{ url_for('index', page = posts.prev_num) }}"> << 上一页 </a>
+  {% else %}
+  {% endif %}
+  {% if posts.has_next %}
+  <a href="{{ url_for('index', page = posts.next_num) }}"> 下一页 >> </a>
+  {% else %}
+  {% endif %}
+</div>
 
 {% endblock %}

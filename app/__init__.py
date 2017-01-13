@@ -11,6 +11,7 @@ db = SQLAlchemy(app)                             # 创建对象(数据库)
 lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
+lm.login_message = '请登录!!'
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
 
 if not app.debug:

@@ -1,0 +1,22 @@
+{
+  "name": "Myblog",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "sakzou <sakuoz@163.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Sakzou/Myblog",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./app/static/resource/plugs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7"
+  }
+}
